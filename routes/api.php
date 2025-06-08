@@ -39,7 +39,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/roles/{id}/restaurar', [RoleController::class, 'restaurar']);
     Route::get('/roles-eliminados', [RoleController::class, 'eliminados']);
 
-    Route::apiResource('roles-admins', \App\Http\Controllers\Usuarios\RolController::class);
     Route::apiResource('tipos-usuarios', \App\Http\Controllers\Usuarios\TipoUsuarioController::class);
     Route::apiResource('usuarios-suspendidos', \App\Http\Controllers\Usuarios\UsuarioSuspendidoController::class);
     Route::apiResource('rutas', \App\Http\Controllers\Usuarios\RutaController::class);
