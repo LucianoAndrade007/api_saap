@@ -226,6 +226,269 @@
                 ]
             }
         },
+        "/api/categorias-usuarios": {
+            "get": {
+                "tags": [
+                    "CategoríasUsuarios"
+                ],
+                "summary": "Listar todas las categorías de usuarios",
+                "description": "Devuelve una lista de todas las categorías de usuarios.",
+                "operationId": "4b0e0f11ba41b36f5606f995726d3dd8",
+                "responses": {
+                    "200": {
+                        "description": "Lista de categorías",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "CategoríasUsuarios"
+                ],
+                "summary": "Crear una nueva categoría de usuario",
+                "description": "Crea una nueva categoría de usuario.",
+                "operationId": "c5aa76cbe8dce01f4e20eb7113e02ee9",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nombre"
+                                ],
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Industrial"
+                                    },
+                                    "descripcion": {
+                                        "type": "string",
+                                        "example": "Pagan Iva"
+                                    },
+                                    "creado_por": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Categoría creada correctamente"
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/categorias-usuarios/{id}": {
+            "get": {
+                "tags": [
+                    "CategoríasUsuarios"
+                ],
+                "summary": "Obtener una categoría de usuario por ID",
+                "description": "Devuelve los datos de una categoría de usuario específica.",
+                "operationId": "f23ff0d5eb4729f6e9d952849df9edb4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Datos de la categoría"
+                    },
+                    "404": {
+                        "description": "Categoría no encontrada"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "CategoríasUsuarios"
+                ],
+                "summary": "Actualizar una categoría de usuario",
+                "description": "Actualiza los datos de una categoría de usuario.",
+                "operationId": "a7f07fb41104e8b01bfae6ef897247d1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nombre"
+                                ],
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Supervisor"
+                                    },
+                                    "descripcion": {
+                                        "type": "string",
+                                        "example": "Pagan Iva"
+                                    },
+                                    "modificado_por": {
+                                        "type": "integer",
+                                        "example": 2
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Categoría actualizada"
+                    },
+                    "404": {
+                        "description": "Categoría no encontrada"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "CategoríasUsuarios"
+                ],
+                "summary": "Eliminar una categoría de usuario",
+                "description": "Realiza un borrado lógico (SoftDelete) de una categoría de usuario.",
+                "operationId": "6e2691120acee6454f2d097db512188a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Categoría eliminada correctamente"
+                    },
+                    "404": {
+                        "description": "Categoría no encontrada"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/categorias-usuarios/{id}/restaurar": {
+            "put": {
+                "tags": [
+                    "CategoríasUsuarios"
+                ],
+                "summary": "Restaurar una categoría de usuario eliminada",
+                "description": "Restaura una categoría previamente eliminada.",
+                "operationId": "ea7ee30e57ae7648cf86a4ad163b1fc6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Categoría restaurada correctamente"
+                    },
+                    "404": {
+                        "description": "Categoría no encontrada"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/categorias-usuarios-eliminados": {
+            "get": {
+                "tags": [
+                    "CategoríasUsuarios"
+                ],
+                "summary": "Listar categorías de usuarios eliminadas",
+                "description": "Devuelve las categorías que han sido eliminadas lógicamente.",
+                "operationId": "14377188b01ece5efc4d89472f9dd537",
+                "responses": {
+                    "200": {
+                        "description": "Lista de categorías eliminadas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
         "/api/roles": {
             "get": {
                 "tags": [
@@ -855,6 +1118,10 @@
         }
     },
     "tags": [
+        {
+            "name": "CategoríasUsuarios",
+            "description": "Operaciones relacionadas con las categorías de usuarios"
+        },
         {
             "name": "Roles",
             "description": "Operaciones relacionadas con los roles del sistema"
