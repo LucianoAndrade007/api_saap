@@ -36,6 +36,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/roles', [RoleController::class, 'store']);
     Route::put('/roles/{id}', [RoleController::class, 'update']);
     Route::delete('/roles/{id}', [RoleController::class, 'destroy']);
+    Route::put('/roles/{id}/restaurar', [RoleController::class, 'restaurar']);
+    Route::get('/roles-eliminados', [RoleController::class, 'eliminados']);
 
     Route::apiResource('roles-admins', \App\Http\Controllers\Usuarios\RolController::class);
     Route::apiResource('tipos-usuarios', \App\Http\Controllers\Usuarios\TipoUsuarioController::class);

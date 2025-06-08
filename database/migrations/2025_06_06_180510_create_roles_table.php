@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nombre', 50)->unique('nombre');
             $table->string('guard_name', 50)->nullable()->default('web');
             $table->integer('creado_por')->nullable();
-            $table->integer('modificado_por')->nullable();
+            $table->integer('modificado_por');
             $table->boolean('estado')->nullable()->default(false);
             $table->softDeletes();
             $table->timestamps();

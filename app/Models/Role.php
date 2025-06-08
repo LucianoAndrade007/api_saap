@@ -16,7 +16,6 @@ class Role extends Model
         'guard_name',
         'creado_por',
         'modificado_por',
-        'estado',
     ];
 
     protected $dates = ['deleted_at'];

@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Usuarios;
 
 use App\Models\Role;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
 
 class RoleController extends Controller
 {
@@ -23,7 +25,6 @@ class RoleController extends Controller
             'nombre' => 'required|string|max:50',
             'guard_name' => 'nullable|string|max:50',
             'creado_por' => 'nullable|integer',
-            'estado' => 'nullable|boolean',
         ]);
 
         $role = Role::create($validated);
@@ -42,7 +43,6 @@ class RoleController extends Controller
             'nombre' => 'required|string|max:50',
             'guard_name' => 'nullable|string|max:50',
             'modificado_por' => 'nullable|integer',
-            'estado' => 'nullable|boolean',
         ]);
 
         $role->update($validated);
@@ -60,6 +60,22 @@ class RoleController extends Controller
 
         return response()->json([
             'message' => 'Rol eliminado correctamente',
+        ]);
+    }
+
+    public function eliminados()
+    {
+        return Role::onlyTrashed()->get();
+    }
+
+    public function restaurar($id)
+    {
+        $role = Role::onlyTrashed()->findOrFail($id);
+        $role->restore();
+
+        return response()->json([
+            'message' => 'Rol restaurado correctamente',
+            'data' => $role,
         ]);
     }
 }
