@@ -752,6 +752,226 @@
                 ]
             }
         },
+        "/api/rutas": {
+            "get": {
+                "tags": [
+                    "Rutas"
+                ],
+                "summary": "Listar todas las rutas",
+                "operationId": "28e40cee216fbd1b6f7e2fc237651395",
+                "responses": {
+                    "200": {
+                        "description": "Lista de rutas"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Rutas"
+                ],
+                "summary": "Crear una nueva ruta",
+                "operationId": "06b69f7f8dcdd1839788beecdef063ee",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nombre"
+                                ],
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Ruta Norte"
+                                    },
+                                    "descripcion": {
+                                        "type": "string",
+                                        "example": "Sector norte del pueblo"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Ruta creada exitosamente"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/rutas/{id}": {
+            "get": {
+                "tags": [
+                    "Rutas"
+                ],
+                "summary": "Ver detalle de una ruta",
+                "operationId": "c7a6da09acb23baf0ca11ebfd96ace55",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detalle de ruta"
+                    },
+                    "404": {
+                        "description": "No encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Rutas"
+                ],
+                "summary": "Actualizar una ruta",
+                "operationId": "4034fff1cee92ba80009411d73784a2d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Ruta Sur"
+                                    },
+                                    "descripcion": {
+                                        "type": "string",
+                                        "example": "Zona sur de la comuna"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ruta actualizada"
+                    },
+                    "404": {
+                        "description": "No encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Rutas"
+                ],
+                "summary": "Eliminar (soft delete) una ruta",
+                "operationId": "f0501986ce9c170e15f5bbcc55673a33",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ruta eliminada"
+                    },
+                    "404": {
+                        "description": "No encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/rutas-eliminadas": {
+            "get": {
+                "tags": [
+                    "Rutas"
+                ],
+                "summary": "Listar rutas eliminadas",
+                "operationId": "0d5ff8bc985a8a663f4168f467532155",
+                "responses": {
+                    "200": {
+                        "description": "Lista de rutas eliminadas"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/rutas-restaurar/{id}": {
+            "put": {
+                "tags": [
+                    "Rutas"
+                ],
+                "summary": "Restaurar una ruta eliminada",
+                "operationId": "37a6dd14888441412b0e169242ede6c2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ruta restaurada"
+                    },
+                    "404": {
+                        "description": "No encontrado o no eliminada"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
         "/api/usuarios": {
             "get": {
                 "tags": [
@@ -1705,6 +1925,10 @@
         {
             "name": "Roles",
             "description": "Operaciones relacionadas con los roles del sistema"
+        },
+        {
+            "name": "Rutas",
+            "description": "Gestión de rutas geográficas"
         },
         {
             "name": "Usuarios",
