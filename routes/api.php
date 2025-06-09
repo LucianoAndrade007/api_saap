@@ -6,6 +6,7 @@ use App\Http\Controllers\Usuarios\UserController;
 use App\Http\Controllers\Usuarios\RoleController;
 use App\Http\Controllers\Usuarios\CategoriaUsuarioController;
 use App\Http\Controllers\Usuarios\UsuarioSuspendidoController;
+use App\Http\Controllers\Usuarios\UsuarioAdminDatoController;
 use Illuminate\Http\Request;
 
 
@@ -31,7 +32,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/usuarios/{id}/restaurar', [UserController::class, 'restaurar']);
     Route::get('/usuarios-eliminados', [UserController::class, 'eliminados']);
 
-    Route::apiResource('admins', \App\Http\Controllers\Usuarios\AdminController::class);// pendiente ya que es una parte de usuarios **
+    Route::apiResource('usuarios-admin-datos', UsuarioAdminDatoController::class);
+    Route::get('usuarios-admin-datos-eliminados', [UsuarioAdminDatoController::class, 'eliminados']);
+    Route::put('usuarios-admin-datos-restaurar/{id}', [UsuarioAdminDatoController::class, 'restore']);
 
     Route::get('/roles', [RoleController::class, 'index']);
     Route::get('/roles/{id}', [RoleController::class, 'show']);

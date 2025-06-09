@@ -1104,6 +1104,246 @@
                 ]
             }
         },
+        "/api/usuarios-admin-datos": {
+            "get": {
+                "tags": [
+                    "Usuarios Admin Datos"
+                ],
+                "summary": "Listar todos los datos admin",
+                "operationId": "ca2509fe6191ac7b54bf3ba1d82652d8",
+                "responses": {
+                    "200": {
+                        "description": "Lista de datos admin"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Usuarios Admin Datos"
+                ],
+                "summary": "Crear un nuevo dato admin",
+                "operationId": "2446edd070d8ad5bdb32f1cb1c5efb72",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "usuario_id"
+                                ],
+                                "properties": {
+                                    "usuario_id": {
+                                        "type": "integer",
+                                        "example": 5
+                                    },
+                                    "imagen": {
+                                        "type": "string",
+                                        "example": "avatar.png"
+                                    },
+                                    "ultima_ip": {
+                                        "type": "string",
+                                        "example": "192.168.1.1"
+                                    },
+                                    "es_super": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "token": {
+                                        "type": "string",
+                                        "example": "abc123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Dato admin creado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/usuarios-admin-datos/{id}": {
+            "get": {
+                "tags": [
+                    "Usuarios Admin Datos"
+                ],
+                "summary": "Ver un dato admin específico",
+                "operationId": "660c73cdd7ef0304ff2a1d2a137ea7cf",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dato admin encontrado"
+                    },
+                    "404": {
+                        "description": "No encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Usuarios Admin Datos"
+                ],
+                "summary": "Actualizar un dato admin",
+                "operationId": "046d38feda1300df107130fb4d8365f8",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "imagen": {
+                                        "type": "string",
+                                        "example": "nueva_imagen.png"
+                                    },
+                                    "ultima_ip": {
+                                        "type": "string",
+                                        "example": "10.0.0.2"
+                                    },
+                                    "es_super": {
+                                        "type": "boolean",
+                                        "example": false
+                                    },
+                                    "token": {
+                                        "type": "string",
+                                        "example": "xyz789"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Dato admin actualizado"
+                    },
+                    "404": {
+                        "description": "No encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Usuarios Admin Datos"
+                ],
+                "summary": "Eliminar (soft delete) un dato admin",
+                "operationId": "329dc2093b6e2b9e890e295174e6d45c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dato admin eliminado"
+                    },
+                    "404": {
+                        "description": "No encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/usuarios-admin-datos-eliminados": {
+            "get": {
+                "tags": [
+                    "Usuarios Admin Datos"
+                ],
+                "summary": "Listar datos admin eliminados",
+                "operationId": "d9e0b3052e62495037271e10668dfc95",
+                "responses": {
+                    "200": {
+                        "description": "Lista de eliminados"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/usuarios-admin-datos-restaurar/{id}": {
+            "put": {
+                "tags": [
+                    "Usuarios Admin Datos"
+                ],
+                "summary": "Restaurar un dato admin eliminado",
+                "operationId": "3a8fccf21cd1a7f9dff9babe0e6623c6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dato restaurado"
+                    },
+                    "404": {
+                        "description": "No encontrado o no eliminado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
         "/api/usuarios-suspendidos": {
             "get": {
                 "tags": [
@@ -1469,6 +1709,10 @@
         {
             "name": "Usuarios",
             "description": "Operaciones relacionadas con los usuarios"
+        },
+        {
+            "name": "Usuarios Admin Datos",
+            "description": "Gestión de datos administrativos de usuarios"
         },
         {
             "name": "Usuarios Suspendidos",
