@@ -41,8 +41,27 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        $this->reportable(function (Throwable $e) {
-            //
+        $this->renderable(function (ValidationException $e, $request) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'Los datos proporcionados son inválidos.',
+                    'errors' => $e->errors(),
+                ], 422);
+            }
         });
+    }
+
+    public function render($request, Throwable $e)
+    {
+        if ($e instanceof ValidationException) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'Los datos proporcionados no son válidos.',
+                    'errors' => $e->errors(),
+                ], 422);
+            }
+        }
+
+        return parent::render($request, $e);
     }
 }

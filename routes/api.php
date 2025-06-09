@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Usuarios\UserController;
 use App\Http\Controllers\Usuarios\RoleController;
 use App\Http\Controllers\Usuarios\CategoriaUsuarioController;
+use App\Http\Controllers\Usuarios\UsuarioSuspendidoController;
 use Illuminate\Http\Request;
 
 
@@ -44,9 +45,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('categorias-usuarios/{id}/restaurar', [CategoriaUsuarioController::class, 'restore']);
     Route::get('categorias-usuarios-eliminados', [CategoriaUsuarioController::class, 'eliminados']);
 
-
-
     Route::apiResource('usuarios-suspendidos', \App\Http\Controllers\Usuarios\UsuarioSuspendidoController::class);
+    Route::put('usuarios-suspendidos-restaurar/{id}', [UsuarioSuspendidoController::class, 'restore']);
+    Route::get('usuarios-suspendidos-eliminados', [UsuarioSuspendidoController::class, 'eliminados']);
+
     Route::apiResource('rutas', \App\Http\Controllers\Usuarios\RutaController::class);
 
 

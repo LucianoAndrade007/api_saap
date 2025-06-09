@@ -1103,6 +1103,346 @@
                     }
                 ]
             }
+        },
+        "/api/usuarios-suspendidos": {
+            "get": {
+                "tags": [
+                    "Usuarios Suspendidos"
+                ],
+                "summary": "Listar suspensiones",
+                "operationId": "e068c8fca35ca6992ab029663f979fe2",
+                "responses": {
+                    "200": {
+                        "description": "Lista de suspensiones",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Usuarios Suspendidos"
+                ],
+                "summary": "Crear una nueva suspensión de usuario",
+                "operationId": "c87eb4915037df16ce5939ee46446e32",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "usuario_id",
+                                    "estado"
+                                ],
+                                "properties": {
+                                    "usuario_id": {
+                                        "type": "integer",
+                                        "example": 3
+                                    },
+                                    "estado": {
+                                        "description": "1: Suspendido, 2: Por Reponer, 3: Repuesto",
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "fecha_suspension": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2025-06-08"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Suspensión creada exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 12
+                                        },
+                                        "usuario_id": {
+                                            "type": "integer",
+                                            "example": 3
+                                        },
+                                        "estado": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "fecha_suspension": {
+                                            "type": "string",
+                                            "format": "date",
+                                            "example": "2025-06-08"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-06-09T04:00:00Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-06-09T04:00:00Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error de validación (por ejemplo: usuario no existe)",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "El usuario especificado no existe en el sistema."
+                                        },
+                                        "errors": {
+                                            "properties": {
+                                                "usuario_id": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "El usuario especificado no existe en el sistema."
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "No autorizado - Token no válido o ausente"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/usuarios-suspendidos/{id}": {
+            "get": {
+                "tags": [
+                    "Usuarios Suspendidos"
+                ],
+                "summary": "Ver detalle de una suspensión",
+                "operationId": "8e96e08ed535a30b55ca31bfb8766996",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detalle de suspensión"
+                    },
+                    "404": {
+                        "description": "No encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Usuarios Suspendidos"
+                ],
+                "summary": "Actualizar una suspensión",
+                "operationId": "a3d8b11fcfb31a67f545005991d3dffd",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "fecha_suspension": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2025-06-20"
+                                    },
+                                    "estado": {
+                                        "type": "integer",
+                                        "example": 2
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Suspensión actualizada"
+                    },
+                    "404": {
+                        "description": "No encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Usuarios Suspendidos"
+                ],
+                "summary": "Eliminar suspensión (soft delete)",
+                "operationId": "f26e6100fe71390232bcb1d4126dca7e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Suspensión eliminada"
+                    },
+                    "404": {
+                        "description": "No encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/usuarios-suspendidos-eliminados": {
+            "get": {
+                "tags": [
+                    "Usuarios Suspendidos"
+                ],
+                "summary": "Listar usuarios suspendidos eliminados (soft deleted)",
+                "operationId": "480312fcb565d0392f413bcc97f57254",
+                "responses": {
+                    "200": {
+                        "description": "Lista de suspensiones eliminadas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "No autorizado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/usuarios-suspendidos-restaurar/{id}": {
+            "put": {
+                "tags": [
+                    "Usuarios Suspendidos"
+                ],
+                "summary": "Restaurar un usuario suspendido eliminado",
+                "operationId": "4c9ffb36d6c734baa00a50dc8a82460f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del registro eliminado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Usuario suspendido restaurado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Usuario suspendido restaurado"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No encontrado o no eliminado"
+                    },
+                    "403": {
+                        "description": "No autorizado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -1129,6 +1469,10 @@
         {
             "name": "Usuarios",
             "description": "Operaciones relacionadas con los usuarios"
+        },
+        {
+            "name": "Usuarios Suspendidos",
+            "description": "Gestión de suspensiones de usuarios"
         },
         {
             "name": "Autenticación",
