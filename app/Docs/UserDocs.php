@@ -199,4 +199,45 @@ class UserDocs
      * )
      */
     public function eliminaUsuarioDoc() {}
+
+    /**
+     * @OA\Put(
+     *     path="/api/usuarios/cambiar-password",
+     *     tags={"Usuarios"},
+     *     summary="Cambiar la contraseña del usuario autenticado",
+     *     security={{"sanctum":{}}},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"password_actual", "nueva_password", "nueva_password_confirmation"},
+     *             @OA\Property(property="password_actual", type="string", example="oldPassword123"),
+     *             @OA\Property(property="nueva_password", type="string", example="newPassword123"),
+     *             @OA\Property(property="nueva_password_confirmation", type="string", example="newPassword123")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Contraseña actualizada correctamente",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Contraseña actualizada correctamente")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=403,
+     *         description="La contraseña actual no es correcta",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="La contraseña actual no es correcta")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Error de validación",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="El campo password_actual es obligatorio.")
+     *         )
+     *     )
+     * )
+     */
+    public function cambiarPassword() {}
+
 }

@@ -1035,9 +1035,13 @@
                                         "type": "string",
                                         "example": "Luciano"
                                     },
-                                    "apellido": {
+                                    "apellido_paterno": {
                                         "type": "string",
                                         "example": "Andrade"
+                                    },
+                                    "apellido_materno": {
+                                        "type": "string",
+                                        "example": "Patiño"
                                     },
                                     "email": {
                                         "type": "string",
@@ -1164,6 +1168,10 @@
                                     "apellido": {
                                         "type": "string",
                                         "example": "Andrade"
+                                    },
+                                    "apellido_materno": {
+                                        "type": "string",
+                                        "example": "Patiño"
                                     },
                                     "email": {
                                         "type": "string",
@@ -1312,6 +1320,99 @@
                                     "items": {
                                         "type": "object"
                                     }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/usuarios/cambiar-password": {
+            "put": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Cambiar la contraseña del usuario autenticado",
+                "operationId": "2cbe1fcab66ca9bdb4a7cd3b849f1641",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "password_actual",
+                                    "nueva_password",
+                                    "nueva_password_confirmation"
+                                ],
+                                "properties": {
+                                    "password_actual": {
+                                        "type": "string",
+                                        "example": "oldPassword123"
+                                    },
+                                    "nueva_password": {
+                                        "type": "string",
+                                        "example": "newPassword123"
+                                    },
+                                    "nueva_password_confirmation": {
+                                        "type": "string",
+                                        "example": "newPassword123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Contraseña actualizada correctamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Contraseña actualizada correctamente"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "La contraseña actual no es correcta",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "La contraseña actual no es correcta"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error de validación",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "El campo password_actual es obligatorio."
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }

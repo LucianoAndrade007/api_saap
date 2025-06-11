@@ -29,33 +29,37 @@ Route::middleware('auth:sanctum')->group(function () {
     | 👤 Usuarios y Administración
     |--------------------------------------------------------------------------
     */
-    Route::apiResource('usuarios', \App\Http\Controllers\Usuarios\UserController::class);
-    Route::put('/usuarios/{id}/restaurar', [UserController::class, 'restaurar']);
-    Route::get('/usuarios-eliminados', [UserController::class, 'eliminados']);
+    // Usuarios
+    Route::put('/usuarios/{id}/restaurar', [UserController::class, 'restaurar'])->name('usuarios.restaurar');
+    Route::get('/usuarios-eliminados', [UserController::class, 'eliminados'])->name('usuarios.eliminados');
+    Route::put('/usuarios/cambiar-password', [UserController::class, 'cambiarPassword'])->name('usuarios.cambiarPassword');
+    Route::apiResource('usuarios', UserController::class);
 
+    // Usuarios Admin Datos
+    Route::get('usuarios-admin-datos-eliminados', [UsuarioAdminDatoController::class, 'eliminados'])->name('usuarios-admin-datos.eliminados');
+    Route::put('usuarios-admin-datos-restaurar/{id}', [UsuarioAdminDatoController::class, 'restore'])->name('usuarios-admin-datos.restaurar');
     Route::apiResource('usuarios-admin-datos', UsuarioAdminDatoController::class);
-    Route::get('usuarios-admin-datos-eliminados', [UsuarioAdminDatoController::class, 'eliminados']);
-    Route::put('usuarios-admin-datos-restaurar/{id}', [UsuarioAdminDatoController::class, 'restore']);
 
-    Route::get('/roles', [RoleController::class, 'index']);
-    Route::get('/roles/{id}', [RoleController::class, 'show']);
-    Route::post('/roles', [RoleController::class, 'store']);
-    Route::put('/roles/{id}', [RoleController::class, 'update']);
-    Route::delete('/roles/{id}', [RoleController::class, 'destroy']);
-    Route::put('/roles/{id}/restaurar', [RoleController::class, 'restaurar']);
-    Route::get('/roles-eliminados', [RoleController::class, 'eliminados']);
+    // Roles
+    Route::put('/roles/{id}/restaurar', [RoleController::class, 'restaurar'])->name('roles.restaurar');
+    Route::get('/roles-eliminados', [RoleController::class, 'eliminados'])->name('roles.eliminados');
+    Route::apiResource('roles', RoleController::class);
 
+    // Categorías de Usuario
+    Route::put('categorias-usuarios/{id}/restaurar', [CategoriaUsuarioController::class, 'restore'])->name('categorias-usuarios.restaurar');
+    Route::get('categorias-usuarios-eliminados', [CategoriaUsuarioController::class, 'eliminados'])->name('categorias-usuarios.eliminados');
     Route::apiResource('categorias-usuarios', CategoriaUsuarioController::class);
-    Route::put('categorias-usuarios/{id}/restaurar', [CategoriaUsuarioController::class, 'restore']);
-    Route::get('categorias-usuarios-eliminados', [CategoriaUsuarioController::class, 'eliminados']);
 
-    Route::apiResource('usuarios-suspendidos', \App\Http\Controllers\Usuarios\UsuarioSuspendidoController::class);
-    Route::put('usuarios-suspendidos-restaurar/{id}', [UsuarioSuspendidoController::class, 'restore']);
-    Route::get('usuarios-suspendidos-eliminados', [UsuarioSuspendidoController::class, 'eliminados']);
+    // Usuarios Suspendidos
+    Route::put('usuarios-suspendidos-restaurar/{id}', [UsuarioSuspendidoController::class, 'restore'])->name('usuarios-suspendidos.restaurar');
+    Route::get('usuarios-suspendidos-eliminados', [UsuarioSuspendidoController::class, 'eliminados'])->name('usuarios-suspendidos.eliminados');
+    Route::apiResource('usuarios-suspendidos', UsuarioSuspendidoController::class);
 
+    // Rutas
+    Route::get('rutas-eliminadas', [RutaController::class, 'eliminados'])->name('rutas.eliminados');
+    Route::put('rutas-restaurar/{id}', [RutaController::class, 'restore'])->name('rutas.restaurar');
     Route::apiResource('rutas', RutaController::class);
-    Route::get('rutas-eliminadas', [RutaController::class, 'eliminados']);
-    Route::put('rutas-restaurar/{id}', [RutaController::class, 'restore']);
+
 
 
     /*
