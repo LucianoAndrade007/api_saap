@@ -15,8 +15,9 @@ return new class extends Migration
             $table->increments('id');
             $table->string('run', 20)->unique('run');
             $table->string('nombre_usuario', 100)->nullable();
-            $table->string('nombre', 100);
-            $table->string('apellido', 100)->nullable();
+            $table->string('nombres', 100);
+            $table->string('apellido_paterno', 100)->nullable();
+            $table->string('apellido_materno', 100)->nullable();
             $table->string('email', 150)->unique('email');
             $table->string('telefono_movil', 20)->nullable();
             $table->string('password');

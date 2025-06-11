@@ -41,7 +41,8 @@ class UserDocs
      *             @OA\Property(property="nombre_usuario", type="string", example="lAndrade"),
      *             @OA\Property(property="telefono_movil", type="string", example="912345678"),
      *             @OA\Property(property="nombre", type="string", example="Luciano"),
-     *             @OA\Property(property="apellido", type="string", example="Andrade"),
+     *             @OA\Property(property="apellido_paterno", type="string", example="Andrade"),
+     *             @OA\Property(property="apellido_materno", type="string", example="Patiño"),
      *             @OA\Property(property="email", type="string", example="luciano@example.com"),
      *             @OA\Property(property="password", type="string", example="12345678")
      *         )
@@ -106,6 +107,7 @@ class UserDocs
      *             @OA\Property(property="telefono_movil", type="string", example="912345678"),
      *             @OA\Property(property="nombre", type="string", example="Luciano"),
      *             @OA\Property(property="apellido", type="string", example="Andrade"),
+     *             @OA\Property(property="apellido_materno", type="string", example="Patiño"),
      *             @OA\Property(property="email", type="string", example="luciano@example.com"),
      *             @OA\Property(property="password", type="string", example="12345678")
      *         )

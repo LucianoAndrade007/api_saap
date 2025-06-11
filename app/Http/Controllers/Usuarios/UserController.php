@@ -25,7 +25,8 @@ class UserController extends Controller
             'nombre_usuario' => 'required|string|max:100',
             'telefono_movil' => 'required|string|max:20',
             'nombre' => 'required|string|max:100',
-            'apellido' => 'nullable|string|max:100',
+            'apellido_paterno' => 'nullable|string|max:100',
+            'apellido_materno' => 'nullable|string|max:100',
             'email' => 'required|email|unique:usuarios,email',
             'password' => 'required|string|min:6',
         ]);
@@ -51,7 +52,8 @@ class UserController extends Controller
             'nombre_usuario' => 'required|string|max:100',
             'telefono_movil' => 'required|string|max:20',
             'nombre' => 'required|string|max:100',
-            'apellido' => 'nullable|string|max:100',
+            'apellido_paterno' => 'nullable|string|max:100',
+            'apellido_materno' => 'nullable|string|max:100',
             'password' => 'required|string|min:6',
             'email' => 'sometimes|email|unique:usuarios,email,' . $usuario->id,
         ]);
