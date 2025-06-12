@@ -1176,10 +1176,6 @@
                                     "email": {
                                         "type": "string",
                                         "example": "luciano@example.com"
-                                    },
-                                    "password": {
-                                        "type": "string",
-                                        "example": "12345678"
                                     }
                                 },
                                 "type": "object"

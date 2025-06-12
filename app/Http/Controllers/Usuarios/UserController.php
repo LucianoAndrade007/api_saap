@@ -49,12 +49,11 @@ class UserController extends Controller
     public function update(Request $request, User $usuario)
     {
         $validated = $request->validate([
-            'nombre_usuario' => 'required|string|max:100',
+            'nombre_usuario' => 'string|max:100',
             'telefono_movil' => 'required|string|max:20',
             'nombre' => 'required|string|max:100',
             'apellido_paterno' => 'nullable|string|max:100',
             'apellido_materno' => 'nullable|string|max:100',
-            'password' => 'required|string|min:6',
             'email' => 'sometimes|email|unique:usuarios,email,' . $usuario->id,
         ]);
         

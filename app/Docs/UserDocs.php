@@ -109,7 +109,6 @@ class UserDocs
      *             @OA\Property(property="apellido", type="string", example="Andrade"),
      *             @OA\Property(property="apellido_materno", type="string", example="Patiño"),
      *             @OA\Property(property="email", type="string", example="luciano@example.com"),
-     *             @OA\Property(property="password", type="string", example="12345678")
      *         )
      *     ),
      *     @OA\Response(
