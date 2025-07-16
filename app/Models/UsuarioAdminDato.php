@@ -18,11 +18,16 @@ class UsuarioAdminDato extends Model
         'usuario_id',
         'imagen',
         'ultima_ip',
-        'es_super',
+        'rol_id',
         'token',
     ];
 
-    protected $casts = [
-        'es_super' => 'boolean',
-    ];
+    public function usuario()
+    {
+        return $this->belongsTo(User::class, 'usuario_id');
+    }
+    public function rol()
+    {
+        return $this->belongsTo(Role::class, 'rol_id');
+    }
 }

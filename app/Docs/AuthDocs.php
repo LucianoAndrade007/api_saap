@@ -61,6 +61,7 @@ class AuthDocs
      *             @OA\Property(property="run", type="string", example="12345678-9"),
      *             @OA\Property(property="nombre_usuario", type="string", example="luciano.dev"),
      *             @OA\Property(property="nombre", type="string", example="Luciano"),
+     *             @OA\Property(property="segundoNombre", type="string", example="Alexis"),
      *             @OA\Property(property="apellido", type="string", example="Andrade"),
      *             @OA\Property(property="email", type="string", example="luciano@example.com"),
      *             @OA\Property(property="telefono_movil", type="string", example="+56912345678"),

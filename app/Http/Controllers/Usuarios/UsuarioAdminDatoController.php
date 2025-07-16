@@ -20,7 +20,7 @@ class UsuarioAdminDatoController extends Controller
             'usuario_id' => 'required|integer|unique:usuarios_admin_datos,usuario_id',
             'imagen' => 'nullable|string',
             'ultima_ip' => 'nullable|ip',
-            'es_super' => 'nullable|boolean',
+            'rol_id' => 'nullable|integer',
             'token' => 'nullable|string',
         ]);
 
@@ -43,7 +43,7 @@ class UsuarioAdminDatoController extends Controller
         $validated = $request->validate([
             'imagen' => 'nullable|string',
             'ultima_ip' => 'nullable|ip',
-            'es_super' => 'nullable|boolean',
+            'rol_id' => 'nullable|integer',
             'token' => 'nullable|string',
         ]);
 
@@ -75,5 +75,13 @@ class UsuarioAdminDatoController extends Controller
 
         $dato->restore();
         return response()->json(['message' => 'Dato restaurado', 'data' => $dato]);
+    }
+
+    public function operadores()
+    {
+        $operadores = UsuarioAdminDato::with('usuario', 'rol') // asegúrate de tener la relación definida
+            ->get();
+
+        return response()->json(['data' => $operadores]);
     }
 }

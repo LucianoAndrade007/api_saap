@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::table('receptores', function (Blueprint $table) {
             $table->foreign(['comuna_id'], 'fk_receptores_comuna')->references(['id'])->on('comunas')->onUpdate('restrict')->onDelete('restrict');
-            $table->foreign(['tipo_id'], 'fk_receptores_tipo')->references(['id'])->on('tipos_receptor')->onUpdate('restrict')->onDelete('restrict');
             $table->foreign(['usuario_id'], 'fk_receptores_usuario')->references(['id'])->on('usuarios')->onUpdate('restrict')->onDelete('cascade');
         });
     }
@@ -25,7 +24,6 @@ return new class extends Migration
     {
         Schema::table('receptores', function (Blueprint $table) {
             $table->dropForeign('fk_receptores_comuna');
-            $table->dropForeign('fk_receptores_tipo');
             $table->dropForeign('fk_receptores_usuario');
         });
     }

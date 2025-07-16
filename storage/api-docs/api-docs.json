@@ -99,6 +99,10 @@
                                         "type": "string",
                                         "example": "Luciano"
                                     },
+                                    "segundoNombre": {
+                                        "type": "string",
+                                        "example": "Alexis"
+                                    },
                                     "apellido": {
                                         "type": "string",
                                         "example": "Andrade"
@@ -480,6 +484,1473 @@
                                 }
                             }
                         }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/comunas": {
+            "get": {
+                "tags": [
+                    "Comunas"
+                ],
+                "summary": "Listar todas las comunas",
+                "description": "Devuelve una lista de todas las comunas con su región asociada.",
+                "operationId": "5b4badfcb6f1d9cbc8859d1ee485931d",
+                "responses": {
+                    "200": {
+                        "description": "Lista de comunas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Comunas"
+                ],
+                "summary": "Crear una nueva comuna",
+                "description": "Crea una nueva comuna en el sistema.",
+                "operationId": "0cdb572a186adc088637490000c55e29",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nombre",
+                                    "region_id"
+                                ],
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Valparaíso"
+                                    },
+                                    "region_id": {
+                                        "type": "integer",
+                                        "example": 5
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Comuna creada correctamente"
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/comunas/{id}": {
+            "get": {
+                "tags": [
+                    "Comunas"
+                ],
+                "summary": "Obtener una comuna por ID",
+                "description": "Devuelve los datos de una comuna específica con su región asociada.",
+                "operationId": "1bec491e55fa8c4e08021fc34cecf2b5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Datos de la comuna"
+                    },
+                    "404": {
+                        "description": "Comuna no encontrada"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Comunas"
+                ],
+                "summary": "Actualizar una comuna",
+                "description": "Actualiza los datos de una comuna existente.",
+                "operationId": "d228dfbf469e375ef7a4fa86e2cae060",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nombre",
+                                    "region_id"
+                                ],
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Viña del Mar"
+                                    },
+                                    "region_id": {
+                                        "type": "integer",
+                                        "example": 5
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Comuna actualizada correctamente"
+                    },
+                    "404": {
+                        "description": "Comuna no encontrada"
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Comunas"
+                ],
+                "summary": "Eliminar una comuna",
+                "description": "Realiza un borrado lógico (SoftDelete) de una comuna.",
+                "operationId": "0ea82f8e816d620af4e7fe7c3c019a1e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Comuna eliminada correctamente"
+                    },
+                    "404": {
+                        "description": "Comuna no encontrada"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/comunas-restaurar/{id}": {
+            "put": {
+                "tags": [
+                    "Comunas"
+                ],
+                "summary": "Restaurar una comuna eliminada",
+                "description": "Restaura una comuna previamente eliminada.",
+                "operationId": "bd77292f40e08058232fc88915df1640",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Comuna restaurada correctamente"
+                    },
+                    "404": {
+                        "description": "Comuna no encontrada"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/comunas-eliminadas": {
+            "get": {
+                "tags": [
+                    "Comunas"
+                ],
+                "summary": "Listar comunas eliminadas",
+                "description": "Devuelve todas las comunas que han sido eliminadas lógicamente.",
+                "operationId": "52f5ea7694c0b7610d79ae12c1a220b7",
+                "responses": {
+                    "200": {
+                        "description": "Lista de comunas eliminadas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/medidores": {
+            "get": {
+                "tags": [
+                    "Medidores"
+                ],
+                "summary": "Listar todos los medidores",
+                "operationId": "1f7933bb6d2110e93b9ba6362bb6fed9",
+                "responses": {
+                    "200": {
+                        "description": "Lista de medidores",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Medidores"
+                ],
+                "summary": "Registrar un nuevo medidor",
+                "operationId": "63f49dcb464895a53eb1115430e33754",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "usuario_id",
+                                    "codigo"
+                                ],
+                                "properties": {
+                                    "usuario_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "tipo_medidor_id": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "alcantarillado": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "codigo": {
+                                        "type": "string",
+                                        "example": "MED-12345"
+                                    },
+                                    "codigo_casa": {
+                                        "type": "string",
+                                        "example": "CASA-12"
+                                    },
+                                    "activo": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Medidor registrado exitosamente"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/medidores/{id}": {
+            "get": {
+                "tags": [
+                    "Medidores"
+                ],
+                "summary": "Obtener un medidor por ID",
+                "operationId": "2675d0a772e68d01847c009c68294ad0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detalles del medidor"
+                    },
+                    "404": {
+                        "description": "Medidor no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Medidores"
+                ],
+                "summary": "Actualizar un medidor",
+                "operationId": "2b7c64cc04c193557222e3d9ddbc0ddb",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "tipo_medidor_id": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "alcantarillado": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "codigo_casa": {
+                                        "type": "string",
+                                        "example": "CASA-14"
+                                    },
+                                    "activo": {
+                                        "type": "boolean",
+                                        "example": false
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Medidor actualizado exitosamente"
+                    },
+                    "404": {
+                        "description": "Medidor no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Medidores"
+                ],
+                "summary": "Eliminar un medidor (soft delete)",
+                "operationId": "15f052e033ccd9a34e2b4d3910b2e5dc",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Medidor eliminado correctamente"
+                    },
+                    "404": {
+                        "description": "Medidor no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/otras-tarifas": {
+            "get": {
+                "tags": [
+                    "Otras Tarifas"
+                ],
+                "summary": "Listar todas las otras tarifas activas",
+                "operationId": "58eb34d1b3f4a5cdd63cda70c6bfbf19",
+                "responses": {
+                    "200": {
+                        "description": "Listado de tarifas obtenido correctamente"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Otras Tarifas"
+                ],
+                "summary": "Crear una nueva tarifa adicional",
+                "operationId": "dac409a48b1fd319c8b60ff0fd5ea105",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "categoria",
+                                    "name",
+                                    "codigo",
+                                    "valor",
+                                    "id_usuario_admin"
+                                ],
+                                "properties": {
+                                    "categoria": {
+                                        "type": "string",
+                                        "maxLength": 20,
+                                        "example": "instalacion"
+                                    },
+                                    "orden": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "maxLength": 300,
+                                        "example": "Cargo por instalación"
+                                    },
+                                    "codigo": {
+                                        "type": "string",
+                                        "maxLength": 50,
+                                        "example": "OTR-001"
+                                    },
+                                    "valor": {
+                                        "type": "integer",
+                                        "example": 15000
+                                    },
+                                    "id_usuario_admin": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tarifa registrada correctamente"
+                    },
+                    "422": {
+                        "description": "Errores de validación"
+                    },
+                    "500": {
+                        "description": "Error interno del servidor"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/pagos": {
+            "get": {
+                "tags": [
+                    "Pagos"
+                ],
+                "summary": "Listar todos los pagos",
+                "operationId": "465dd5dc1b6641c664796a839de36d32",
+                "responses": {
+                    "200": {
+                        "description": "Lista de pagos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Pagos"
+                ],
+                "summary": "Registrar un nuevo pago",
+                "operationId": "58e46facfae1e9f3c628c45368142b12",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "consumo_id",
+                                    "usuario_id",
+                                    "monto_total"
+                                ],
+                                "properties": {
+                                    "consumo_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "usuario_id": {
+                                        "type": "integer",
+                                        "example": 5
+                                    },
+                                    "tipo_usuario_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "tipo_medidor_id": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "m3_consumidos": {
+                                        "type": "integer",
+                                        "example": 15
+                                    },
+                                    "valor_m3_agua": {
+                                        "type": "integer",
+                                        "example": 550
+                                    },
+                                    "valor_fijo_agua": {
+                                        "type": "integer",
+                                        "example": 1000
+                                    },
+                                    "valor_m3_alcantarillado": {
+                                        "type": "integer",
+                                        "example": 450
+                                    },
+                                    "valor_fijo_alcantarillado": {
+                                        "type": "integer",
+                                        "example": 1000
+                                    },
+                                    "iva": {
+                                        "type": "integer",
+                                        "example": 722
+                                    },
+                                    "monto_total": {
+                                        "type": "integer",
+                                        "example": 4800
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Pago creado exitosamente"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/pagos/{id}": {
+            "get": {
+                "tags": [
+                    "Pagos"
+                ],
+                "summary": "Obtener un pago por ID",
+                "operationId": "a508b5bfbe0504e6546a96fa61b449fb",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detalles del pago"
+                    },
+                    "404": {
+                        "description": "Pago no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Pagos"
+                ],
+                "summary": "Eliminar un pago",
+                "description": "Soft delete del pago.",
+                "operationId": "c3c56d9b57d3ec7c0298d2988ca6f3ce",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Pago eliminado correctamente"
+                    },
+                    "404": {
+                        "description": "Pago no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/pagos/generar-desde-consumo": {
+            "post": {
+                "tags": [
+                    "Pagos"
+                ],
+                "summary": "Generar un pago a partir del consumo",
+                "operationId": "ab10f7b936d8281bc7a45d6412a85061",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "consumo": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 12
+                                            },
+                                            "usuario_id": {
+                                                "type": "integer",
+                                                "example": 7
+                                            },
+                                            "consumo": {
+                                                "type": "integer",
+                                                "example": 15
+                                            },
+                                            "fecha_lectura": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2025-07-01T10:00:00"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "tarifas": {
+                                        "properties": {
+                                            "valor_m3_agua": {
+                                                "type": "integer",
+                                                "example": 550
+                                            },
+                                            "valor_m3_alcantarillado": {
+                                                "type": "integer",
+                                                "example": 450
+                                            },
+                                            "valor_fijo_agua": {
+                                                "type": "integer",
+                                                "example": 1000
+                                            },
+                                            "valor_fijo_alcantarillado": {
+                                                "type": "integer",
+                                                "example": 1000
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Pago generado correctamente"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/pagos-dte-datos": {
+            "get": {
+                "tags": [
+                    "PagosDTE"
+                ],
+                "summary": "Listar todos los registros DTE de pagos",
+                "operationId": "5117946609b73fa25e011a5ee209c762",
+                "responses": {
+                    "200": {
+                        "description": "Lista de pagos_dte_datos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "PagosDTE"
+                ],
+                "summary": "Registrar datos DTE para un pago",
+                "operationId": "328992cd08c77eb548beb7cfee5a52a2",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "numero_folio"
+                                ],
+                                "properties": {
+                                    "numero_folio": {
+                                        "type": "integer",
+                                        "example": 105012
+                                    },
+                                    "timbre": {
+                                        "type": "string",
+                                        "example": "timbre_base64"
+                                    },
+                                    "numero_resolucion": {
+                                        "type": "integer",
+                                        "example": 80
+                                    },
+                                    "fecha_resolucion": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-01-10"
+                                    },
+                                    "token": {
+                                        "type": "string",
+                                        "example": "token_autorizacion"
+                                    },
+                                    "pdf": {
+                                        "type": "string",
+                                        "format": "binary",
+                                        "example": "archivo.pdf"
+                                    },
+                                    "es_visible": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Datos DTE registrados exitosamente"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/pagos-dte-datos/{id}": {
+            "get": {
+                "tags": [
+                    "PagosDTE"
+                ],
+                "summary": "Obtener datos DTE por ID",
+                "operationId": "944f0aae282d056b3bd150fa6da779ea",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Datos del DTE"
+                    },
+                    "404": {
+                        "description": "Registro DTE no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "PagosDTE"
+                ],
+                "summary": "Eliminar datos DTE de un pago",
+                "description": "Soft delete del registro de datos DTE.",
+                "operationId": "7e66a37b4fb4e71f218ac9e6850e0c77",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Datos DTE eliminados correctamente"
+                    },
+                    "404": {
+                        "description": "Datos DTE no encontrados"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/receptores": {
+            "get": {
+                "tags": [
+                    "Receptores"
+                ],
+                "summary": "Listar todos los receptores",
+                "operationId": "70e91b8693e4d328aa2df3e434583582",
+                "responses": {
+                    "200": {
+                        "description": "Lista de receptores",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Receptores"
+                ],
+                "summary": "Registrar un nuevo receptor",
+                "operationId": "145a4d30583dc3008ba87cce2c60ae5d",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "run",
+                                    "razon_social",
+                                    "actividad_comercial",
+                                    "direccion",
+                                    "comuna_id",
+                                    "usuario_id"
+                                ],
+                                "properties": {
+                                    "run": {
+                                        "type": "string",
+                                        "example": "12345678-9"
+                                    },
+                                    "razon_social": {
+                                        "type": "string",
+                                        "example": "Receptor S.A."
+                                    },
+                                    "actividad_comercial": {
+                                        "type": "string",
+                                        "example": "Servicios de Agua"
+                                    },
+                                    "direccion": {
+                                        "type": "string",
+                                        "example": "Av. Principal 1234"
+                                    },
+                                    "comuna_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "usuario_id": {
+                                        "type": "integer",
+                                        "example": 3
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Receptor creado correctamente"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/receptores/{id}": {
+            "get": {
+                "tags": [
+                    "Receptores"
+                ],
+                "summary": "Obtener un receptor por ID",
+                "operationId": "8946383b7d99f109943e55cff6b72122",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Datos del receptor"
+                    },
+                    "404": {
+                        "description": "Receptor no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Receptores"
+                ],
+                "summary": "Actualizar un receptor",
+                "operationId": "6e6e561e33613bcbf1f0e074c643f48a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "run": {
+                                        "type": "string",
+                                        "example": "12345678-9"
+                                    },
+                                    "razon_social": {
+                                        "type": "string",
+                                        "example": "Receptor S.A."
+                                    },
+                                    "actividad_comercial": {
+                                        "type": "string",
+                                        "example": "Servicios"
+                                    },
+                                    "direccion": {
+                                        "type": "string",
+                                        "example": "Calle Falsa 123"
+                                    },
+                                    "comuna_id": {
+                                        "type": "integer",
+                                        "example": 5
+                                    },
+                                    "usuario_id": {
+                                        "type": "integer",
+                                        "example": 3
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Receptor actualizado correctamente"
+                    },
+                    "404": {
+                        "description": "Receptor no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Receptores"
+                ],
+                "summary": "Eliminar un receptor (soft delete)",
+                "operationId": "449886771e99ebac5bd86288c2a3556d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Receptor eliminado correctamente"
+                    },
+                    "404": {
+                        "description": "Receptor no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/registro-consumo": {
+            "get": {
+                "tags": [
+                    "RegistroConsumo"
+                ],
+                "summary": "Listar todos los registros de consumo",
+                "operationId": "6150a27ff4f34b01d04eccbcdfd86a2b",
+                "responses": {
+                    "200": {
+                        "description": "Lista de consumos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "RegistroConsumo"
+                ],
+                "summary": "Registrar un nuevo consumo y generar pago automáticamente",
+                "description": "Registra una nueva lectura de consumo. Al mismo tiempo, se genera un pago asociado basado en las tarifas vigentes para el usuario y tipo de medidor.",
+                "operationId": "417f31effeea713dfb7c0f93d2d9097e",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "medidor_id",
+                                    "usuario_id",
+                                    "consumo",
+                                    "fecha_lectura",
+                                    "administrador_id"
+                                ],
+                                "properties": {
+                                    "medidor_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "usuario_id": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "consumo": {
+                                        "type": "integer",
+                                        "example": 120
+                                    },
+                                    "costo_reposicion_servicio": {
+                                        "type": "integer",
+                                        "example": 0
+                                    },
+                                    "multa_intervencion_servicio": {
+                                        "type": "integer",
+                                        "example": 0
+                                    },
+                                    "fecha_lectura": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2025-07-01T10:00:00"
+                                    },
+                                    "foto": {
+                                        "type": "string",
+                                        "example": "foto.jpg"
+                                    },
+                                    "comentarios": {
+                                        "type": "string",
+                                        "example": "Problema de tal motivo"
+                                    },
+                                    "origen": {
+                                        "type": "string",
+                                        "example": "WEB o MOVIL"
+                                    },
+                                    "lectura_enviada": {
+                                        "type": "boolean",
+                                        "example": false
+                                    },
+                                    "administrador_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Consumo registrado y pago generado automáticamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Lectura registrada correctamente."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error al registrar el consumo o generar el pago"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/registro-consumo/{id}": {
+            "get": {
+                "tags": [
+                    "RegistroConsumo"
+                ],
+                "summary": "Obtener un consumo por ID",
+                "operationId": "f579f836fd6ab84f299da3d305519164",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Datos del consumo"
+                    },
+                    "404": {
+                        "description": "Consumo no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "RegistroConsumo"
+                ],
+                "summary": "Actualizar un consumo",
+                "operationId": "995eac2e60884dbee32456f25f614588",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "consumo": {
+                                        "type": "integer",
+                                        "example": 150
+                                    },
+                                    "comentarios": {
+                                        "type": "string",
+                                        "example": "Actualizado por revisión"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Consumo actualizado"
+                    },
+                    "404": {
+                        "description": "Consumo no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "RegistroConsumo"
+                ],
+                "summary": "Eliminar un consumo",
+                "description": "Soft delete de un registro de consumo.",
+                "operationId": "a4f916b2b01944b1f45c5989cfe78b51",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Consumo eliminado"
+                    },
+                    "404": {
+                        "description": "Consumo no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/registro-consumo/usuario/{usuario_id}/medidor/{medidor_id}": {
+            "get": {
+                "tags": [
+                    "RegistroConsumo"
+                ],
+                "summary": "Obtener lecturas por usuario y medidor",
+                "description": "Retorna todas las lecturas de un usuario específico y un medidor dado, ordenadas por fecha de lectura descendente.",
+                "operationId": "a87a1715aa187750c4c507d464eeda0a",
+                "parameters": [
+                    {
+                        "name": "usuario_id",
+                        "in": "path",
+                        "description": "ID del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "medidor_id",
+                        "in": "path",
+                        "description": "ID del medidor",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de lecturas del usuario para el medidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Usuario o medidor no encontrado"
                     }
                 },
                 "security": [
@@ -972,6 +2443,93 @@
                 ]
             }
         },
+        "/api/tarifas": {
+            "post": {
+                "tags": [
+                    "Tarifas"
+                ],
+                "summary": "Crear una nueva tarifa. Si existe una tarifa activa para el mismo medidor y categoría, será eliminada (soft delete)",
+                "operationId": "cec8e4a296df08e53b48af8ff5a19357",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "c_f_agua",
+                                    "c_f_alcan",
+                                    "m3_agua",
+                                    "m3_alcan",
+                                    "actualizado_por_id"
+                                ],
+                                "properties": {
+                                    "categorias_usuarios_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "tipos_medidor_id": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "c_f_agua": {
+                                        "type": "integer",
+                                        "example": 2500
+                                    },
+                                    "c_f_alcan": {
+                                        "type": "integer",
+                                        "example": 1000
+                                    },
+                                    "m3_agua": {
+                                        "type": "integer",
+                                        "example": 550
+                                    },
+                                    "m3_alcan": {
+                                        "type": "integer",
+                                        "example": 450
+                                    },
+                                    "actualizado_por_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tarifa creada exitosamente"
+                    },
+                    "422": {
+                        "description": "Errores de validación"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/agrupadas": {
+            "get": {
+                "tags": [
+                    "Tarifas"
+                ],
+                "summary": "Listar tarifas agrupadas por categoría y tipo de medidor",
+                "operationId": "7c58856e0a84c14d965036c97d9e0dab",
+                "responses": {
+                    "200": {
+                        "description": "Tarifas agrupadas correctamente"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
         "/api/usuarios": {
             "get": {
                 "tags": [
@@ -1034,6 +2592,10 @@
                                     "nombre": {
                                         "type": "string",
                                         "example": "Luciano"
+                                    },
+                                    "segundoNombre": {
+                                        "type": "string",
+                                        "example": "Alexis"
                                     },
                                     "apellido_paterno": {
                                         "type": "string",
@@ -1164,6 +2726,10 @@
                                     "nombre": {
                                         "type": "string",
                                         "example": "Luciano"
+                                    },
+                                    "segundoNombre": {
+                                        "type": "string",
+                                        "example": "Alexis"
                                     },
                                     "apellido": {
                                         "type": "string",
@@ -1465,9 +3031,9 @@
                                         "type": "string",
                                         "example": "192.168.1.1"
                                     },
-                                    "es_super": {
-                                        "type": "boolean",
-                                        "example": true
+                                    "rol_id": {
+                                        "type": "integer",
+                                        "example": 1
                                     },
                                     "token": {
                                         "type": "string",
@@ -1551,9 +3117,9 @@
                                         "type": "string",
                                         "example": "10.0.0.2"
                                     },
-                                    "es_super": {
-                                        "type": "boolean",
-                                        "example": false
+                                    "rol_id": {
+                                        "type": "integer",
+                                        "example": 1
                                     },
                                     "token": {
                                         "type": "string",
@@ -1652,6 +3218,364 @@
                     },
                     "404": {
                         "description": "No encontrado o no eliminado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/usuarios-admin-datos/operadores": {
+            "get": {
+                "tags": [
+                    "Usuarios Admin Datos"
+                ],
+                "summary": "Listar operadores (usuarios con datos admin) con su información de usuario",
+                "description": "Retorna todos los registros de la tabla usuarios_admin_datos junto con los datos del usuario asociado.",
+                "operationId": "28a2a2ab3d134c49a1e6decd5983c7ea",
+                "responses": {
+                    "200": {
+                        "description": "Lista de operadores con datos del usuario",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "usuario_id": {
+                                                        "type": "integer",
+                                                        "example": 3
+                                                    },
+                                                    "imagen": {
+                                                        "type": "string",
+                                                        "example": "avatar.png"
+                                                    },
+                                                    "ultima_ip": {
+                                                        "type": "string",
+                                                        "example": "192.168.1.100"
+                                                    },
+                                                    "rol_id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "token": {
+                                                        "type": "string",
+                                                        "example": "abc123xyz"
+                                                    },
+                                                    "usuario": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 3
+                                                            },
+                                                            "nombre": {
+                                                                "type": "string",
+                                                                "example": "Juan Pérez"
+                                                            },
+                                                            "email": {
+                                                                "type": "string",
+                                                                "example": "juan@example.com"
+                                                            },
+                                                            "telefono_movil": {
+                                                                "type": "string",
+                                                                "example": "912345678"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/usuario-cliente-datos": {
+            "get": {
+                "tags": [
+                    "Usuario Cliente Datos"
+                ],
+                "summary": "Listar todos los datos cliente",
+                "operationId": "df1f95010a206ecc1eb46788e19062ac",
+                "responses": {
+                    "200": {
+                        "description": "Lista de datos cliente"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Usuario Cliente Datos"
+                ],
+                "summary": "Crear nuevo dato cliente",
+                "operationId": "6772efa638a2c1ca53e40deded3ed90b",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "usuario_id"
+                                ],
+                                "properties": {
+                                    "usuario_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "alias": {
+                                        "type": "string",
+                                        "example": "Cliente X"
+                                    },
+                                    "giro": {
+                                        "type": "string",
+                                        "example": "Comercio"
+                                    },
+                                    "direccion": {
+                                        "type": "string",
+                                        "example": "Av. Principal 123"
+                                    },
+                                    "numero_casa": {
+                                        "type": "string",
+                                        "example": "456B"
+                                    },
+                                    "ciudad": {
+                                        "type": "string",
+                                        "example": "Rancagua"
+                                    },
+                                    "numero_cliente": {
+                                        "type": "string",
+                                        "example": "C-00123"
+                                    },
+                                    "factura": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "subsidio_apr": {
+                                        "type": "boolean",
+                                        "example": false
+                                    },
+                                    "tipo_cliente_id": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "id_ruta": {
+                                        "type": "integer",
+                                        "example": 3
+                                    },
+                                    "subsidio_municipal": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "porcentaje_desc_municipal": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 25.5
+                                    },
+                                    "mcs_desc_municipal": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 1000
+                                    },
+                                    "fijos_desc_municipal": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 500
+                                    },
+                                    "numero_resolucion": {
+                                        "type": "string",
+                                        "example": "R-2025-001"
+                                    },
+                                    "puntaje_ficha": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 8735
+                                    },
+                                    "fecha_encuesta": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-05-12"
+                                    },
+                                    "numunico": {
+                                        "type": "string",
+                                        "example": "12345678"
+                                    },
+                                    "dv_numunico": {
+                                        "type": "string",
+                                        "example": "K"
+                                    },
+                                    "fecha_inicio": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-01-01"
+                                    },
+                                    "fecha_termino": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2025-12-31"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Dato cliente creado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/usuario-cliente-datos/{id}": {
+            "get": {
+                "tags": [
+                    "Usuario Cliente Datos"
+                ],
+                "summary": "Obtener un dato cliente específico",
+                "operationId": "bc87777ec93772cfe58ee0ee0f739b08",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dato cliente encontrado"
+                    },
+                    "404": {
+                        "description": "No encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Usuario Cliente Datos"
+                ],
+                "summary": "Actualizar un dato cliente",
+                "operationId": "7517344175839979e55500c1d54da329",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "alias": {
+                                        "type": "string",
+                                        "example": "Nuevo alias"
+                                    },
+                                    "direccion": {
+                                        "type": "string",
+                                        "example": "Nueva dirección 456"
+                                    },
+                                    "ciudad": {
+                                        "type": "string",
+                                        "example": "Talca"
+                                    },
+                                    "factura": {
+                                        "type": "boolean",
+                                        "example": false
+                                    },
+                                    "subsidio_apr": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "fecha_termino": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2026-01-01"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Dato cliente actualizado"
+                    },
+                    "404": {
+                        "description": "No encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Usuario Cliente Datos"
+                ],
+                "summary": "Eliminar (soft delete) un dato cliente",
+                "operationId": "28defce72164e8a537b9fc21c5b8ebd5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dato cliente eliminado"
+                    },
+                    "404": {
+                        "description": "No encontrado"
                     }
                 },
                 "security": [
@@ -2020,6 +3944,34 @@
             "description": "Operaciones relacionadas con las categorías de usuarios"
         },
         {
+            "name": "Comunas",
+            "description": "Operaciones relacionadas con las comunas"
+        },
+        {
+            "name": "Medidores",
+            "description": "Operaciones relacionadas con los medidores de agua"
+        },
+        {
+            "name": "Otras Tarifas",
+            "description": "Gestión de otras tarifas como cargos por conexión, instalación u otros"
+        },
+        {
+            "name": "Pagos",
+            "description": "Operaciones relacionadas con los pagos de consumo de agua"
+        },
+        {
+            "name": "PagosDTE",
+            "description": "Operaciones relacionadas con los datos de documentos tributarios electrónicos (DTE) asociados a pagos"
+        },
+        {
+            "name": "Receptores",
+            "description": "Operaciones relacionadas con los receptores de usuarios"
+        },
+        {
+            "name": "RegistroConsumo",
+            "description": "Operaciones relacionadas con los registros de consumo de agua"
+        },
+        {
             "name": "Roles",
             "description": "Operaciones relacionadas con los roles del sistema"
         },
@@ -2028,12 +3980,20 @@
             "description": "Gestión de rutas geográficas"
         },
         {
+            "name": "Tarifas",
+            "description": "Gestión de tarifas de agua y alcantarillado"
+        },
+        {
             "name": "Usuarios",
             "description": "Operaciones relacionadas con los usuarios"
         },
         {
             "name": "Usuarios Admin Datos",
             "description": "Gestión de datos administrativos de usuarios"
+        },
+        {
+            "name": "Usuario Cliente Datos",
+            "description": "Gestión de datos del cliente asociados al usuario"
         },
         {
             "name": "Usuarios Suspendidos",

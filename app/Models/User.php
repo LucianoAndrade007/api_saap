@@ -26,6 +26,7 @@ class User extends Authenticatable
         'run',
         'nombre_usuario',
         'nombre',
+        'segundoNombre',
         'apellido_paterno',
         'apellido_materno',
         'email',
@@ -57,4 +58,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'deleted_at' => 'datetime',
     ];
+
+    public function adminDato()
+    {
+        return $this->hasOne(UsuarioAdminDato::class, 'usuario_id');
+    }
 }

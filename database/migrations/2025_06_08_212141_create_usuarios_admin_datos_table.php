@@ -15,7 +15,7 @@ return new class extends Migration
             $table->unsignedInteger('usuario_id')->primary();
             $table->string('imagen')->nullable();
             $table->string('ultima_ip', 45)->nullable();
-            $table->boolean('es_super')->nullable()->default(false);
+            $table->boolean('rol_id')->nullable();
             $table->string('token')->nullable();
             $table->softDeletes();
             $table->timestamps();

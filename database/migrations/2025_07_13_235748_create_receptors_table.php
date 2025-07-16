@@ -12,17 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('receptores', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('run', 12);
-            $table->string('razon_social', 200);
-            $table->string('actividad_comercial', 200);
-            $table->string('direccion');
-            $table->unsignedInteger('comuna_id')->index('idx_receptores_comuna');
-            $table->unsignedInteger('usuario_id')->index('idx_receptores_usuario');
+            $table->id();
             $table->timestamps();
-            $table->softDeletes();
-
-            $table->unique(['run', 'usuario_id'], 'uk_receptores_run_usuario');
         });
     }
 

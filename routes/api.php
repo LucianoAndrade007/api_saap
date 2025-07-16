@@ -8,6 +8,18 @@ use App\Http\Controllers\Usuarios\CategoriaUsuarioController;
 use App\Http\Controllers\Usuarios\UsuarioSuspendidoController;
 use App\Http\Controllers\Usuarios\UsuarioAdminDatoController;
 use App\Http\Controllers\Usuarios\RutaController;
+use App\Http\Controllers\Usuarios\UsuarioClienteDatoController;
+use App\Http\Controllers\Usuarios\ReceptoresController;
+use App\Http\Controllers\Usuarios\ComunaController;
+
+use App\Http\Controllers\Agua\RegistroConsumoController;
+use App\Http\Controllers\Agua\TarifaController;
+use App\Http\Controllers\Agua\OtrasTarifaController;
+use App\Http\Controllers\Agua\PagoController;
+use App\Http\Controllers\Agua\PagoDteDatoController;
+use App\Http\Controllers\Agua\MedidorController;
+
+
 use Illuminate\Http\Request;
 
 
@@ -38,7 +50,9 @@ Route::middleware('auth:sanctum')->group(function () {
     // Usuarios Admin Datos
     Route::get('usuarios-admin-datos-eliminados', [UsuarioAdminDatoController::class, 'eliminados'])->name('usuarios-admin-datos.eliminados');
     Route::put('usuarios-admin-datos-restaurar/{id}', [UsuarioAdminDatoController::class, 'restore'])->name('usuarios-admin-datos.restaurar');
+    Route::get('/usuarios-admin-datos/operadores', [UsuarioAdminDatoController::class, 'operadores']);
     Route::apiResource('usuarios-admin-datos', UsuarioAdminDatoController::class);
+    Route::apiResource('usuario-cliente-datos', UsuarioClienteDatoController::class);
 
     // Roles
     Route::put('/roles/{id}/restaurar', [RoleController::class, 'restaurar'])->name('roles.restaurar');
@@ -60,20 +74,39 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('rutas-restaurar/{id}', [RutaController::class, 'restore'])->name('rutas.restaurar');
     Route::apiResource('rutas', RutaController::class);
 
+    //Receptores
+    Route::apiResource('receptores', ReceptoresController::class);
 
+    // Comunas
+    Route::get('comunas-eliminadas', [ComunaController::class, 'eliminados'])->name('comunas.eliminados');
+    Route::put('comunas-restaurar/{id}', [ComunaController::class, 'restaurar'])->name('comunas.restaurar');
+    Route::apiResource('comunas', ComunaController::class);
 
     /*
     |--------------------------------------------------------------------------
     | 💧 Agua y Consumo
     |--------------------------------------------------------------------------
     */
-    Route::apiResource('consumos', \App\Http\Controllers\Agua\ConsumoController::class);
-    Route::apiResource('medidores', \App\Http\Controllers\Agua\MedidorController::class);
+
+    Route::get('/registro-consumo/usuario/{usuario_id}/medidor/{medidor_id}', [RegistroConsumoController::class, 'lecturasPorUsuarioYMedidor']);
+    Route::apiResource('registro-consumo', RegistroConsumoController::class);
+
+    Route::post('/pagos/generar', [PagoController::class, 'generarDesdeConsumo']);
+    Route::apiResource('pagos', PagoController::class);
+    Route::apiResource('pagos-dte-datos', PagoDteDatoController::class);
+
+    Route::get('/tarifas/agrupadas', [TarifaController::class, 'agrupadas']);
+    Route::apiResource('tarifas', TarifaController::class);
+
+    Route::apiResource('otras-tarifas', OtrasTarifaController::class);
+    
+    Route::apiResource('medidores', MedidorController::class);
+
+
     Route::apiResource('produccion-agua', \App\Http\Controllers\Agua\ProduccionAguaController::class);
     Route::apiResource('repactaciones', \App\Http\Controllers\Agua\RepactacionController::class);
     Route::apiResource('convenios', \App\Http\Controllers\Agua\ConvenioController::class);
     Route::apiResource('subsidios', \App\Http\Controllers\Agua\SubsidioController::class);
-    Route::apiResource('historial-pagos', \App\Http\Controllers\Agua\PagosController::class);
 
     /*
     |--------------------------------------------------------------------------
@@ -92,7 +125,6 @@ Route::middleware('auth:sanctum')->group(function () {
     |--------------------------------------------------------------------------
     */
     Route::apiResource('afps', \App\Http\Controllers\Parametros\AFPController::class);
-    Route::apiResource('parametros-generales', \App\Http\Controllers\Parametros\ParametrosGeneralesController::class);
     Route::apiResource('parametros-contables', \App\Http\Controllers\Parametros\ParametrosContablesController::class);
     Route::apiResource('tipos-medidor', \App\Http\Controllers\Parametros\TipoMedidorController::class);
     Route::apiResource('tipo-clientes', \App\Http\Controllers\Parametros\TipoClienteController::class);
